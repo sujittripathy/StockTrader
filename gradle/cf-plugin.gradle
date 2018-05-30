@@ -1,0 +1,26 @@
+buildscript {
+    ext {
+        cfAppVersion = '2.1.0'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/releases" }
+        maven { url "https://repo.spring.io/release" }
+    }
+    dependencies {
+        classpath("com.github.pivotalservices:ya-cf-app-gradle-plugin:${cfAppVersion}")
+    }
+}
+
+apply plugin: 'cf-app'
+
+cfConfig {
+    ccHost = "api.run.pivotal.io"
+    ccUser = "tripathy1.kits@gmail.com"
+    ccPassword = "Sujit@2018"
+    org = "Neon"
+    space = "development"
+
+    name = "StockTrader"
+    filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
+}

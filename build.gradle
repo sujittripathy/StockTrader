@@ -1,0 +1,50 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.13.RELEASE'
+	//	cfAppVersion = '2.1.0'
+	}
+	repositories {
+		mavenCentral()
+//		maven { url "https://oss.sonatype.org/content/repositories/releases" }
+//		maven { url "https://repo.spring.io/release" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	//	classpath("com.github.pivotalservices:ya-cf-app-gradle-plugin:${cfAppVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+//apply plugin: 'cf-app'
+
+group = 'com.personal'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+//	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+//cfConfig {
+//	ccHost = "api.run.pivotal.io"
+//	ccUser = "tripathy1.kits@gmail.com"
+//	ccPassword = "Sujit@2018"
+//	org = "Neon"
+//	space = "development"
+//
+//	name = "StockTrader"
+//	filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
+//
+//	//buildpack = "https://github.com/cloudfoundry/java-buildpack.git"
+//}
