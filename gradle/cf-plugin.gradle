@@ -11,17 +11,21 @@
 //        classpath("com.github.pivotalservices:ya-cf-app-gradle-plugin:${cfAppVersion}")
 //    }
 //}
-//
-//apply plugin: 'cf-app'
-//
-//cfConfig {
-//    ccHost = "api.run.pivotal.io"
-//    def console = System.console();
-//    ccUser = console.readLine('> Enter User Name : ')
-//    ccPassword = console.readLine('> Enter Password : ')
-//    org = "Neon"
-//    space = "development"
-//
-//    name = "StockTrader"
-//    filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
-//}
+
+apply plugin: 'cf-app'
+
+cfConfig {
+    ccHost = "api.run.pivotal.io"
+    def console = System.console();
+    if(console != null) {
+        ccUser = console.readLine('> Enter User Name : ')
+        ccPassword = console.readLine('> Enter Password : ')
+    }
+    org = "Neon"
+    space = "development"
+
+    name = "StockTrader"
+    filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
+
+    //buildpack = "https://github.com/cloudfoundry/java-buildpack.git"
+}

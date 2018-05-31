@@ -5,8 +5,8 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
-		maven { url "https://oss.sonatype.org/content/repositories/releases" }
-		maven { url "https://repo.spring.io/release" }
+	//	maven { url "https://oss.sonatype.org/content/repositories/releases" }
+	//	maven { url "https://repo.spring.io/release" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -17,7 +17,8 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'cf-app'
+
+apply from: 'gradle/cf-plugin.gradle'
 
 group = 'com.personal'
 version = '0.0.1-SNAPSHOT'
@@ -36,16 +37,18 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-cfConfig {
-	ccHost = "api.run.pivotal.io"
-	def console = System.console();
-	ccUser = console.readLine('> Enter User Name : ')
-	ccPassword = console.readLine('> Enter Password : ')
-	org = "Neon"
-	space = "development"
-
-	name = "StockTrader"
-	filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
-
-	//buildpack = "https://github.com/cloudfoundry/java-buildpack.git"
-}
+//cfConfig {
+//	ccHost = "api.run.pivotal.io"
+//	def console = System.console();
+//	if(console != null) {
+//		ccUser = console.readLine('> Enter User Name : ')
+//		ccPassword = console.readLine('> Enter Password : ')
+//	}
+//	org = "Neon"
+//	space = "development"
+//
+//	name = "StockTrader"
+//	filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
+//
+//	//buildpack = "https://github.com/cloudfoundry/java-buildpack.git"
+//}
