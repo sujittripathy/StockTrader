@@ -5,8 +5,6 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
-	//	maven { url "https://oss.sonatype.org/content/repositories/releases" }
-	//	maven { url "https://repo.spring.io/release" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -37,19 +35,3 @@ dependencies {
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-
-//cfConfig {
-//	ccHost = "api.run.pivotal.io"
-//	def console = System.console();
-//	if(console != null) {
-//		ccUser = console.readLine('> Enter User Name : ')
-//		ccPassword = console.readLine('> Enter Password : ')
-//	}
-//	org = "Neon"
-//	space = "development"
-//
-//	name = "StockTrader"
-//	filePath = "build/libs/StockTracker-0.0.1-SNAPSHOT.jar"
-//
-//	//buildpack = "https://github.com/cloudfoundry/java-buildpack.git"
-//}
