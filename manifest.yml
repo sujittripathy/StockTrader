@@ -1,0 +1,7 @@
+---
+applications:
+  - name: StockTracker
+    buildpack: java_buildpack
+    path: build/libs/StockTracker-0.0.1-SNAPSHOT.jar
+    services:
+      - mysql
