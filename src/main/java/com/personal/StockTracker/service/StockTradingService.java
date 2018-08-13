@@ -35,6 +35,7 @@ public class StockTradingService {
 
 	public String getLatestStockPrice(String tick_symbol){
 		String endpoint = stockTrackerProps.getTradingEndpoint().concat(tick_symbol).concat("/book");
+		LOGGING.info("endpoint > " + endpoint);
 		Optional<StockPriceModel> stockPriceModel =
 				Optional.ofNullable(restTemplate.
 						getForObject(endpoint,StockPriceModel.class));

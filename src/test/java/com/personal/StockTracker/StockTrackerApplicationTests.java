@@ -1,5 +1,6 @@
 package com.personal.StockTracker;
 
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Before;
 import org.junit.Rule;
@@ -12,13 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.ResourceUtils;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.FileNotFoundException;
-
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 //import static com.github.tomakehurst.wiremock.client.WireMock.get;
 //import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 //import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
@@ -32,27 +30,21 @@ public class StockTrackerApplicationTests {
 	TestRestTemplate testRestTemplate;
 
 	@Rule
-	public WireMockRule wireMockRule = new WireMockRule(8089);
+	public WireMockRule wireMockRule = new WireMockRule(WireMockConfiguration.wireMockConfig().port(8089));
 
-
-//	@Test
-	public void testStockAPI() throws FileNotFoundException {
+	@Before
+	public void setUp() {
 		stubFor(get("/1.0/stock/box/book")
 				.willReturn(aResponse()
+						.withHeader("content-type", "application/json")
 						.withStatus(HttpStatus.OK.value())
-					//	.withBodyFile("classpath:response.txt")
-						.withBodyFile("response.txt")
-				));
-
-		String response =
-				testRestTemplate.getForObject("http://localhost:8089/1.0/stock/box/book",String.class);
-		assertThat(response).isEqualTo("Hello, There");
+						.withBody("21.71")));
 	}
 
 	@Test
 	public void testStockPrice(){
 		ResponseEntity<String> price =
 			testRestTemplate.getForEntity("/stock/latest-price?sym=box",String.class);
-		assertThat(price).isNotNull();
+		//	assertThat(StringUtils.isNumber(price.getBody())).isTrue();
 	}
 }
